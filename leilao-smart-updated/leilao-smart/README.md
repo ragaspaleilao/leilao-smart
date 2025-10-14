@@ -1,0 +1,1 @@
+LeilaoSmart updated package. Use docker compose up --build to run all services.

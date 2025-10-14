@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:5
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+  backend:
+    build: ./backend
+    container_name: leilaosmart_backend
+    env_file: .env
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/leilaosmart
+      - PORT=4000
+      - SCRAPER_URL=http://scraper:4020
+    depends_on:
+      - mongo
+      - scraper
+    ports:
+      - "4000:4000"
+  scraper:
+    build:
+      context: ./scraper-service
+      dockerfile: Dockerfile.scraper
+    container_name: leilaosmart_scraper
+    env_file: .env
+    environment:
+      - SCRAPER_PORT=4020
+    ports:
+      - "4020:4020"
+  frontend:
+    build: ./frontend
+    container_name: leilaosmart_frontend
+    env_file: .env
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+    ports:
+      - "3000:3000"
+volumes:
+  mongo-data:

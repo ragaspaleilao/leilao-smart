@@ -1,0 +1,11 @@
+{
+  "name": "leilao-smart-scraper",
+  "version": "0.1.0",
+  "main": "src/scraperEntry.js",
+  "scripts": {
+    "start": "node src/scraperEntry.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

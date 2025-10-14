@@ -1,0 +1,1 @@
+Scraper stub. Run: npm install && npm start
