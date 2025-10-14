@@ -1,2 +1,0 @@
-web: cd backend && npm start
-scraper: cd scraper-service && npm start
