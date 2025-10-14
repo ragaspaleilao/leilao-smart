@@ -1,0 +1,20 @@
+# Imagem base
+FROM node:18
+
+# Criar diretório de trabalho
+WORKDIR /app
+
+# Copiar o backend do caminho correto
+COPY leilao-smart-updated/leilao-smart/backend ./backend
+
+# Entrar na pasta backend
+WORKDIR /app/backend
+
+# Instalar dependências
+RUN npm install
+
+# Expor porta
+EXPOSE 8080
+
+# Rodar o servidor
+CMD ["npm", "start"]
