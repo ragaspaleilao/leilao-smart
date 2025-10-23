@@ -18,6 +18,21 @@ mongoose.connect(MONGO_URI).then(()=>console.log('Mongo connected')).catch(e=>co
 app.use('/api/search', searchRouter);
 app.use('/health', healthRouter);
 
+//
+// 🔍 Rota de teste da conexão com o MongoDB
+app.get('/api/test', async (req, res) => {
+  try {
+    const collections = await mongoose.connection.db.listCollections().toArray();
+    res.json({
+      status: 'connected',
+      db: mongoose.connection.name,
+      collections: collections.map(c => c.name)
+    });
+  } catch (error) {
+    res.status(500).json({ status: 'error', message: error.message });
+  }
+});
+
 app.get('/', (req, res) => res.json({ service: 'LeilaoSmart Backend', status: 'ok' }));
 
 const PORT = process.env.PORT || 4000;
