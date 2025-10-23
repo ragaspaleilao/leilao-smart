@@ -18,7 +18,6 @@ mongoose.connect(MONGO_URI).then(()=>console.log('Mongo connected')).catch(e=>co
 app.use('/api/search', searchRouter);
 app.use('/health', healthRouter);
 
-//
 // 🔍 Rota de teste da conexão com o MongoDB
 app.get('/api/test', async (req, res) => {
   try {
